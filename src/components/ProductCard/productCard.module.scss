@@ -1,0 +1,61 @@
+.card {
+	width: 260px;
+	height: 210px;
+	background: var(--dark-green);
+	border-radius: 10px;
+	transition: all 0.5s;
+	&:hover {
+		transform: scale(1.05);
+	}
+	&Container {
+		border-radius: 10px;
+		&Img {
+			object-fit: contain;
+			width: 100%;
+		}
+		&Desct {
+			display: grid;
+			text-align: start;
+			grid-template-columns: 1fr;
+			grid-template-rows: 1fr 1fr 1fr;
+			padding: 6px;
+			color: var(--white);
+
+			.title {
+				font-size: 18;
+			}
+
+			.data {
+				font-size: 15;
+			}
+
+			.action {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+
+				.price {
+					font-size: 14;
+				}
+
+				.like {
+					height: 24px;
+					cursor: pointer;
+					transition: all 0.5s;
+					&:hover{
+						transform: scale(1.1);
+						svg * {
+							transition: all 0.5s;
+							fill: red
+						}
+					}
+				}
+
+			}
+
+		}
+
+	}
+	
+
+}

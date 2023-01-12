@@ -1,0 +1,30 @@
+.root {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-top: 10px;
+	li {
+		display: inline-block;
+		a {
+			background: var(--gray);
+			text-align: center;
+			width: 45px;
+			line-height: 42px;
+			height: 45px;
+			border: none;
+			border-radius: 30px;
+			margin: 0 5px;
+			cursor: pointer;
+			display: inline-block;
+			color: var(--white);
+
+			&:hover {
+				background-color: var(--dark-green);
+				color: var(--white);
+			}
+
+		}
+
+	}
+
+}

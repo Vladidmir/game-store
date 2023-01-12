@@ -1,0 +1,28 @@
+
+.list {
+	display: grid;
+	grid-template-columns: repeat(4, 260px);
+	grid-template-rows: repeat(2, 210px);
+
+	align-items: center;
+	justify-content: center;
+	gap: 20px;
+
+	@media (max-width: 1100px) {
+		grid-template-columns: repeat(3, 260px);
+		grid-template-rows: repeat(3, 210px);
+	}
+
+	@media (max-width: 850px) {
+		grid-template-columns: repeat(2, 260px);
+		grid-template-rows: repeat(4, 210px);
+
+
+	}
+
+	@media (max-width: 600px) {
+		grid-template-columns: repeat(1, 260px);
+		grid-template-rows: repeat(8, 150px, 210px)
+	}
+
+}

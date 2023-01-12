@@ -1,0 +1,17 @@
+.mainPage {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	min-height: calc(100vh - 100px);
+	margin-top: 10px;
+	padding: 0 15px;
+
+	@media (max-width: 850px) {
+	
+	.scroll {
+			overflow-y: scroll;
+			max-height: 80vh;
+		}
+	}
+
+}

@@ -1,0 +1,16 @@
+.error {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	min-width: 400px;
+	text-align: center;
+
+		&Text {
+			color: var(--white);
+			font-size: 25px;
+		}
+		&Link {
+			margin-top: 40px;
+			color: var(--white);
+		}
+}
