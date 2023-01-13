@@ -1,23 +1,29 @@
-import React, { FC } from "react";
+import { FC } from "react";
+
 import ReactPaginate from "react-paginate";
 
 import s from "./pagination.module.scss";
-
-type PaginationProps = {
-  onChangePage: (page: number) => void;
-};
-
-export const Pagination: FC<PaginationProps> = ({ onChangePage }) => {
+interface IPaginationProps {
+  pageCount: number;
+  handlePageClick: (event: any) => any;
+}
+export const Pagination: FC<IPaginationProps> = ({
+  pageCount,
+  handlePageClick,
+}) => {
   return (
-    <ReactPaginate
-      className={s.root}
-      breakLabel="..."
-      nextLabel=">"
-      previousLabel="<"
-      onPageChange={(event) => onChangePage(event.selected + 1)}
-      pageRangeDisplayed={4}
-      pageCount={3}
-      activeClassName={s.active}
-    />
+    <>
+      <ReactPaginate
+        className={s.root}
+        breakLabel="..."
+        nextLabel=">"
+        previousLabel="<"
+        onPageChange={handlePageClick}
+        pageRangeDisplayed={4}
+        pageCount={pageCount}
+        activeClassName={s.active}
+        activeLinkClassName={s.active}
+      />
+    </>
   );
 };

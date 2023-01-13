@@ -1,9 +1,10 @@
 .card {
-	width: 260px;
-	height: 210px;
+	max-width: 260px;
+	max-height: 210px;
 	background: var(--dark-green);
 	border-radius: 10px;
 	transition: all 0.5s;
+	cursor: pointer;
 	&:hover {
 		transform: scale(1.05);
 	}
@@ -17,9 +18,10 @@
 			display: grid;
 			text-align: start;
 			grid-template-columns: 1fr;
-			grid-template-rows: 1fr 1fr 1fr;
+			grid-template-rows: auto;
 			padding: 6px;
 			color: var(--white);
+			max-height: 210px;
 
 			.title {
 				font-size: 18;
@@ -56,6 +58,4 @@
 		}
 
 	}
-	
-
 }

@@ -1,22 +1,28 @@
-import { useState, FC, CSSProperties } from "react";
+import { useState, useEffect } from "react";
+import { useAppDispatch } from "store";
 import { ReactComponent as SearchIcon } from "../../assets/search.svg";
-import classNames from "classnames";
 
 import s from "./search.module.scss";
 
-interface ISearch {
-  extraStyle?: CSSProperties;
-}
+import useDebounce from "hooks/useDebounce";
+import { setSearchValue } from "store/slices/gameFilterSlice";
 
-export const Search: FC<ISearch> = ({ extraStyle }) => {
+export const Search = () => {
   const [liveValue, setLiveValue] = useState("");
+  const dispatch = useAppDispatch();
+
+  const debouncedValue = useDebounce<string>(liveValue, 500);
 
   const onChangeInput = (str: string) => {
     setLiveValue(str);
   };
 
+  useEffect(() => {
+    dispatch(setSearchValue(liveValue));
+  }, [debouncedValue]);
+
   return (
-    <div className={classNames(s.inputContainer, { extraStyle: extraStyle })}>
+    <div className={s.inputContainer}>
       <input
         name="search"
         onChange={(e) => onChangeInput(e.target.value)}

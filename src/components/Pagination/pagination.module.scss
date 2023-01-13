@@ -5,6 +5,11 @@
 	margin-top: 10px;
 	li {
 		display: inline-block;
+			.active {
+					background: var(--dark-green);
+					color: var(--white);
+					border: 1px solid (--white)
+				}
 		a {
 			background: var(--gray);
 			text-align: center;
@@ -17,7 +22,6 @@
 			cursor: pointer;
 			display: inline-block;
 			color: var(--white);
-
 			&:hover {
 				background-color: var(--dark-green);
 				color: var(--white);
