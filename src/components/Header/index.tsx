@@ -1,5 +1,6 @@
 import { useEffect, useState, FC } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useAppSelector } from "store";
 
 import { Search, Sorting, FavoriteButton } from "../index";
 import { ReactComponent as HomePageIcon } from "../../assets/homepage.svg";
@@ -8,16 +9,14 @@ import steamLogo from "../../assets/steam_logo.png";
 import s from "./header.module.scss";
 import { useWindowSize } from "../../hooks/useWindowSize";
 
-interface IHeaderProps {
-  pageName: "mainPage" | "favoritesPage";
-}
-
-//можно було чере флекс ордер або грід еріа зробити адаптацію , але було мало часу і 
+//можно було чере флекс ордер або грід еріа зробити адаптацію , але було мало часу і
 // я пішов найпростішим способом )
 
-export const Header: FC<IHeaderProps> = ({ pageName }) => {
+export const Header: FC = () => {
   const [smallScreen, setSmallScreen] = useState(false);
+  const { totalCount } = useAppSelector((state) => state.gameFavoritesReduser);
 
+  const location = useLocation().pathname;
   let navigate = useNavigate();
   const { width } = useWindowSize();
 
@@ -41,22 +40,23 @@ export const Header: FC<IHeaderProps> = ({ pageName }) => {
             >
               <img src={steamLogo} alt="steam logo" />
             </a>
-            {pageName === "favoritesPage" ? (
+            {location === "/favorites" ? (
               <Link to="/" onClick={() => navigate("/")}>
                 <HomePageIcon className={s.btnHome} />
               </Link>
             ) : (
-              <FavoriteButton />
+              <FavoriteButton count={totalCount} />
             )}
           </div>
 
           <div className={s.bottom}>
             <Search />
-
-            <div className={s.sort}>
-              <Sorting type="order" />
-              <Sorting type="category" />
-            </div>
+            {location !== "/favorites" && (
+              <div className={s.sort}>
+                <Sorting type="order" />
+                <Sorting type="category" />
+              </div>
+            )}
           </div>
         </>
       ) : (
@@ -69,14 +69,19 @@ export const Header: FC<IHeaderProps> = ({ pageName }) => {
             <img src={steamLogo} alt="steam logo" />
           </a>
           <Search />
-          <Sorting type="order" />
-          <Sorting type="category" />
-          {pageName === "favoritesPage" ? (
+          {location !== "/favorites" && (
+            <>
+              <Sorting type="order" />
+              <Sorting type="category" />
+            </>
+          )}
+
+          {location === "/favorites" ? (
             <Link to="/" onClick={() => navigate("/")}>
               <HomePageIcon className={s.btnHome} />
             </Link>
           ) : (
-            <FavoriteButton />
+            <FavoriteButton count={totalCount} />
           )}
         </>
       )}

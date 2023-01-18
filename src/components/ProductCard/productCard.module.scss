@@ -41,18 +41,37 @@
 				}
 
 				.like {
-					height: 24px;
+					max-height: 25px;
 					cursor: pointer;
-					transition: all 0.5s;
+					background: none;
+					border: none;
+					transition: all 0.5;
 					&:hover{
 						transform: scale(1.1);
 						svg * {
 							transition: all 0.5s;
-							fill: red
+							fill: red;
 						}
 					}
 				}
 
+			}
+
+			.addInfo {
+				padding: 4px 0;
+				text-align: center;
+		
+				.more {
+					color: rgb(81, 190, 88);
+					&:hover {
+						color: var(--white);
+						transition: all 0.5s;
+					}
+				}
+				.noMore {
+					padding: 4px 0;
+					color: rgb(205, 213, 52)
+				}
 			}
 
 		}

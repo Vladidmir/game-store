@@ -7,7 +7,7 @@ import {
 
 const initialState: GameFilterSliceState = {
   searchValue: "",
-  categoryName: CategoryEnum.GAME_PRICE,
+  categoryName: CategoryEnum.GAME_RELEASE,
   sortByOrder: OrderEnum.TO_BIGGER,
 };
 
@@ -22,7 +22,7 @@ const gameFilterSlice = createSlice({
       state.categoryName = payload;
     },
 
-    sortByOrder(state, { payload }: PayloadAction<OrderEnum>) {
+    setSortByOrder(state, { payload }: PayloadAction<OrderEnum>) {
       state.sortByOrder = payload;
     },
   },
@@ -31,4 +31,4 @@ const gameFilterSlice = createSlice({
 const { actions, reducer } = gameFilterSlice;
 
 export default reducer;
-export const { setSearchValue, setCategoryValue, sortByOrder } = actions;
+export const { setSearchValue, setCategoryValue, setSortByOrder } = actions;

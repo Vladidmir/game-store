@@ -24,5 +24,6 @@ export const usePagination = ({ data }: IUsePagination) => {
     handlePageClick,
     pageCount,
     currentItems,
+    setCurrentItems,
   };
 };

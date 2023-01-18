@@ -1,4 +1,5 @@
-import { useState, FC, useRef } from "react";
+import { useState, FC, useRef, useEffect } from "react";
+import { store, useAppDispatch, useAppSelector } from "store";
 
 import { ReactComponent as ArrowIcon } from "../../assets/sort/arrow.svg";
 import { ReactComponent as CalendarIcon } from "../../assets/sort/calendar.svg";
@@ -7,27 +8,50 @@ import { ReactComponent as SlidersIcon } from "../../assets/sort/sliders.svg";
 
 import useOnClickOutside from "../../hooks/useOnClickOutside";
 import { TCategoryData, TOrderData, ISortingProps } from "./Sorting.props";
+import {
+  CategoryEnum,
+  OrderEnum,
+} from "store/slices/gameFilterSlice/gameFilterTypes";
+import { setCategoryValue, setSortByOrder } from "store/slices/gameFilterSlice";
 
 import cn from "classnames";
 import s from "./sorting.module.scss";
 
-const categoryData: TCategoryData[] = [
-  { id: 0, label: "Price", Icon: PricetagIcon },
-  { id: 1, label: "Publish Date", Icon: CalendarIcon },
-];
-
-const orderData: TOrderData[] = [
-  { id: 0, label: "Lower to bigger" },
-  { id: 1, label: "Bigger to lower" },
-];
-
 // краще б написав два окремих компоненти,ніж один універсальний і важко читаємий, але вже пізно відступати :D
 
 export const Sorting: FC<ISortingProps> = ({ type }) => {
+  const dispatch = useAppDispatch();
+  const { categoryName, sortByOrder } = useAppSelector(
+    (state) => state.gameFilterReducer
+  );
+
+  const categoryData: TCategoryData[] = [
+    {
+      id: 0,
+      label: CategoryEnum.GAME_RELEASE,
+      Icon: PricetagIcon,
+    },
+    {
+      id: 1,
+      label: CategoryEnum.GAME_PRICE,
+      Icon: CalendarIcon,
+    },
+  ];
+
+  const orderData: TOrderData[] = [
+    {
+      id: 1,
+      label: OrderEnum.TO_LOWER,
+    },
+    {
+      id: 0,
+      label: OrderEnum.TO_BIGGER,
+    },
+  ];
   const [items] = useState<TCategoryData[] | TOrderData[]>(
     type === "category" ? categoryData : orderData
   );
-  const [selectedItem, setSelectedItem] = useState(1);
+  const [selectedItem, setSelectedItem] = useState(0);
 
   const [isVisible, setVisibility] = useState(false);
   const burgerRef = useRef(null);
@@ -80,20 +104,27 @@ export const Sorting: FC<ISortingProps> = ({ type }) => {
           <div
             key={item.id}
             className={s.dropdownItem}
-            onClick={() => handleItemClick(item.id)}
+            onClick={() => {
+              handleItemClick(item.id);
+              if ("Icon" in item) {
+                dispatch(setCategoryValue(item.label));
+              } else {
+                dispatch(setSortByOrder(item.label));
+              }
+            }}
           >
-            <p>{item.label}</p>
+            {"Icon" in item ? <p>{item.label}</p> : <p>{item.label}</p>}
 
             {"Icon" in item ? (
               <item.Icon
                 className={cn(s.dropdownItemIcon, {
-                  [s.dropdownItemIconSelected]: item.id === selectedItem,
+                  [s.dropdownItemIconSelected]: item.label === categoryName,
                 })}
               />
             ) : (
               <div
                 className={cn(s.dropdownItemDot, {
-                  [s.dropdownItemDotSelected]: item.id === selectedItem,
+                  [s.dropdownItemDotSelected]: item.label === sortByOrder,
                 })}
               ></div>
             )}

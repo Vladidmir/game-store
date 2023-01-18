@@ -12,5 +12,6 @@ export * from "./Pagination";
 export * from "./NoActionGif";
 export * from "./ErrorMesage";
 export * from "./pages/MainPage";
+export * from "./pages/DetailsPage";
 export * from "./pages/FavoritesPage";
 export * from "./pages/NotFound";

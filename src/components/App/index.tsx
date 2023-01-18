@@ -5,6 +5,7 @@ import {
   MainPage,
   FavoritesPage,
   NotFound,
+  DetailsPage,
 } from "../index";
 
 export const App = () => {
@@ -12,7 +13,9 @@ export const App = () => {
     <OutsideAppContainer>
       <Routes>
         <Route path="/" element={<MainPage />} />
+        <Route path="/:cardId" element={<DetailsPage />} />
         <Route path="favorites" element={<FavoritesPage />} />
+        <Route path="/favorites/:cardId" element={<DetailsPage />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </OutsideAppContainer>

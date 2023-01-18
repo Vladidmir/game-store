@@ -1,0 +1,226 @@
+.detailCard {
+	max-width: 400px;
+	background: var(--dark-green);
+	transition: all 0.5s;
+	border-radius: 10px;
+	margin: 0 10px;
+	position: relative;
+	
+
+	&Container {
+		border-radius: 10px;
+
+		&Img {
+			object-fit: contain;
+			border-radius: 10px;
+			width: 100%;
+		}
+
+		&Info {
+			display: grid;
+			text-align: start;
+			grid-template-columns: 1fr;
+			grid-template-rows: auto;
+			padding: 6px;
+
+			.header{
+				display: flex;
+				flex-direction: column;
+				justify-content: space-between;
+				border-bottom: 1px solid gray;
+				.top {
+					display: flex;
+					flex-direction: column;
+						border-bottom: 1px solid gray;
+						align-items: center;
+					&Title {
+						font-size: 20px;
+						color: var(--white);
+					}
+					&Released {
+						display: flex;
+						font-size: 14px;
+						padding: 5px;
+						color: var(--white);
+						p {
+							margin-right: 5px;
+						}
+						
+					}
+				}
+				.bottom {
+					padding: 5px;
+					&Price {
+						font-size: 18;
+						color: var(--white);
+						text-align: end;
+					}
+						&Feedback {
+							color: var(--white);
+							display: flex;
+							p {
+								margin-right: 4px;
+								font-size: 12;
+							};
+							span {
+								font-size: 14;
+							}
+					}
+
+				}
+			
+			}
+
+			.description {
+				padding: 5px;
+				font-size: 14px;
+				height: 100px;
+				overflow-y: scroll;
+				color: var(--white);
+				border-bottom: 1px solid var(--gray);
+				&::-webkit-scrollbar {
+						width: 8px;
+					}
+				
+					&::-webkit-scrollbar-track {
+						background: var(--dark-gray);
+						border-radius: 12px;
+					}
+				
+					&::-webkit-scrollbar-thumb {
+						background: linear-gradient(rgb(134, 239, 172), rgb(59, 130, 246, ), rgb(234, 51, 75));
+						border-radius: 12px;
+					}
+				&Scroll {
+						height: auto;
+						
+					&Text {
+							font-size: 14;
+							color: var(--white)
+					}
+				}
+			
+			}
+
+			.tags {
+				padding: 5px;
+				font-size: 15;
+				height: 70px;
+				overflow-y: scroll;
+				color: var(--gray);
+				&::-webkit-scrollbar {
+						width: 8px;
+					}
+				
+					&::-webkit-scrollbar-track {
+						background: var(--dark-gray);
+						border-radius: 12px;
+					}
+				
+					&::-webkit-scrollbar-thumb {
+						background: linear-gradient(rgb(134, 239, 172), rgb(59, 130, 246, ), rgb(234, 51, 75));
+						border-radius: 12px;
+					}
+				&Container {
+					height: auto;
+					display: grid;
+					grid-template-columns: 1fr 1fr;
+
+					@media (max-width: 400px) {
+						display: flex;
+						flex-wrap: wrap;
+							a {
+								margin: 5px;
+							}
+					}
+				}
+			}
+
+			.team {
+				padding: 5px;
+				border-bottom: 1px solid var(--gray);
+
+				span {
+					margin-right: 5px;
+					color: var(--white);
+					font-size: 14px;
+				}
+				
+				a { 
+					font-size: 16px;
+					color: var(--white)
+				}
+				&Publisher {
+					span {}
+					a {
+						
+					}
+				}
+				&Developer {
+					span {}
+					
+					a {}
+				}
+
+			}
+
+			.action {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+
+				.price {
+					font-size: 14;
+				}
+
+				.like {
+					max-height: 25px;
+					cursor: pointer;
+					background: none;
+					border: none;
+					transition: all 0.5;
+
+					&:hover {
+						transform: scale(1.1);
+
+						svg * {
+							transition: all 0.5s;
+							fill: red;
+						}
+					}
+				}
+
+			}
+		}
+
+	}
+		.back {
+			position: absolute;
+			background: var(--dark-green);
+			padding: 10px;
+			border-radius: 5px;
+			top: 0;
+			left: 0;
+			height: 70px;
+			width: 70px;
+			border: none;
+			cursor: pointer;
+			transition: all 0.5s;
+			&:hover {
+				background: var(--white);
+				svg * {
+						fill:var(--dark-green);
+					}
+			}
+			
+			svg * {
+				fill: var(--white);
+				height: 50px;
+				width: 50px;
+
+					&:hover {
+							fill: var(--dark-green);
+						}
+			}
+	}
+}
