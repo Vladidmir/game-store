@@ -1,4 +1,5 @@
 export interface IGameData {
+  date: string | number | Date;
   appId?: string;
   title: string;
   url: string;

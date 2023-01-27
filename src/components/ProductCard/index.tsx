@@ -41,34 +41,47 @@ export const ProductCard: FC<IGameData> = (game) => {
     }
   }, [favorites, game, location]);
 
-  return (
-    <div className={s.card}>
-      <div className={s.cardContainer}>
-        <img className={s.cardContainerImg} src={game.imgUrl} alt="thumbnail" />
-        <div className={s.cardContainerDesct}>
-          <p className={s.title}>
-            {game.title.length > 20
-              ? `${game.title.slice(0, 20)}...`
-              : game.title}
-          </p>
-          <p className={s.data}>{game.released}</p>
-          <div className={s.action}>
-            <p className={s.price}>{game.price}</p>
-            <button
-              className={s.like}
-              onClick={isFav ? removeFromFavorite : addToFavouite}
-            >
-              {isFav === true ? <LikeFilledIcon /> : <LikeOutlineIcon />}
-            </button>
-          </div>
+  let index = game.price.indexOf("€");
+  let subString = game.price.slice(0, index + 1);
 
-          <div className={s.addInfo}>
-            <Link className={s.more} to={`${game.appId}`}>
-              Read more
-            </Link>
+  return (
+    <>
+      {game && (
+        <div className={s.card}>
+          <div className={s.cardContainer}>
+            <img
+              className={s.cardContainerImg}
+              src={game.imgUrl}
+              alt="thumbnail"
+            />
+            <div className={s.cardContainerDesct}>
+              <p className={s.title}>
+                {game.title.length > 20
+                  ? `${game.title.slice(0, 20)}...`
+                  : game.title}
+              </p>
+              <p className={s.data}>{game.released}</p>
+              <div className={s.action}>
+                <p className={s.price}>
+                  {subString.length ? subString : "Free to play"}
+                </p>
+                <button
+                  className={s.like}
+                  onClick={isFav ? removeFromFavorite : addToFavouite}
+                >
+                  {isFav === true ? <LikeFilledIcon /> : <LikeOutlineIcon />}
+                </button>
+              </div>
+
+              <div className={s.addInfo}>
+                <Link className={s.more} to={`${game.appId}`}>
+                  Read more
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
+      )}
+    </>
   );
 };

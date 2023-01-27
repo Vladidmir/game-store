@@ -7,31 +7,7 @@ import {
   GameFilterSliceState,
   OrderEnum,
 } from "../gameFilterSlice/gameFilterTypes";
-import { customDateSort } from "helpers";
-
-// export const fetchGamesByName = createAsyncThunk<
-//   IGameData[],
-//   string,
-//   {
-//     state: { gameReducer: IGameSlice; gameFilterReducer: GameFilterSliceState };
-//   }
-// >(
-//   "@gameSlice/fetchGamesByName",
-
-//   async (gameName, { getState }) => {
-//     const { searchValue, categoryName, sortByOrder } =
-//       getState().gameFilterReducer;
-//     if (gameName === "" && searchValue === "") {
-//       return [];
-//     } else {
-//       const { data } = await axios.get(
-//         `/search/${gameName || searchValue}/page/1`
-//       );
-
-//       return data;
-//     }
-//   }
-// );
+import { customDateSort, sortByPrice } from "helpers";
 
 export const fetchGamesByName = createAsyncThunk<
   IGameData[],
@@ -51,13 +27,21 @@ export const fetchGamesByName = createAsyncThunk<
       `/search/${searchValue}/page/1`
     );
 
-    if (
-      categoryName === CategoryEnum.GAME_RELEASE &&
-      sortByOrder === OrderEnum.TO_BIGGER
-    ) {
-      return data.sort((a, b) => customDateSort(a, b, "-"));
-    } else {
-      return data.sort((a, b) => customDateSort(a, b, "+"));
+    let displayData = data;
+
+    if (categoryName === CategoryEnum.GAME_RELEASE) {
+      if (sortByOrder === OrderEnum.TO_BIGGER) {
+        displayData = customDateSort(data, "-");
+      } else {
+        displayData = customDateSort(data, "+");
+      }
+    } else if (categoryName === CategoryEnum.GAME_PRICE) {
+      if (sortByOrder === OrderEnum.TO_BIGGER) {
+        displayData = sortByPrice(data, "-");
+      } else {
+        displayData = sortByPrice(data, "+");
+      }
     }
+    return displayData;
   }
 );

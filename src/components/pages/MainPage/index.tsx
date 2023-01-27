@@ -12,6 +12,7 @@ import { NoActionGif } from "components/NoActionGif";
 import { usePagination } from "hooks/usePagination";
 
 import s from "./mainPage.module.scss";
+
 export const MainPage = () => {
   const dispatch = useAppDispatch();
   const { items, status, isFound } = useAppSelector(
@@ -49,20 +50,6 @@ export const MainPage = () => {
     //якщо пригати з детальної чторінки до головної - буде помилка 429
     dispatch(fetchGamesByName());
   }, [dispatch, searchValue, sortByOrder, categoryName]);
-
-  useEffect(() => {
-    //Це Фільтрація по ціні
-    // const regex = /[$,]/g;
-    // Можна було б легко вирізати зайві символи та відфільтрувати список
-    // за домомогою регулярки вище, та нажаль зломане апі (пруфи розмістив в srs/assets/brokenApi)
-    // if (
-    //   categoryName === CategoryEnum.GAME_PRICE &&
-    //   sortByOrder === OrderEnum.TO_BIGGER
-    // ) {
-    // } else {
-    // бла бла
-    // }
-  }, [categoryName, sortByOrder]);
 
   return (
     <>
