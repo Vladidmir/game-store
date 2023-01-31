@@ -14,8 +14,6 @@ export type TOrderData = {
   label: OrderEnum;
 };
 
-// краще б написав два окремих компоненти,ніж один універсальний і важко читаємий, але вже пізно відступати :D
-
 export const OrderBurger: FC = () => {
   const dispatch = useAppDispatch();
   const { sortByOrder } = useAppSelector((state) => state.gameFilterReducer);
@@ -31,7 +29,6 @@ export const OrderBurger: FC = () => {
     },
   ];
   const [items] = useState<TOrderData[]>(orderData);
-  const [selectedItem, setSelectedItem] = useState(0);
   const [isVisible, setVisibility] = useState(false);
   const burgerRef = useRef(null);
 
@@ -39,8 +36,8 @@ export const OrderBurger: FC = () => {
 
   const toggleDropdown = () => setVisibility(!isVisible);
 
-  const handleItemClick = (id: number) => {
-    setSelectedItem(id);
+  const handleItemClick = (label: OrderEnum) => {
+    dispatch(setSortByOrder(label));
     setTimeout(() => {
       toggleDropdown();
     }, 200);
@@ -60,10 +57,7 @@ export const OrderBurger: FC = () => {
           <div
             key={item.id}
             className={s.dropdownItem}
-            onClick={() => {
-              handleItemClick(item.id);
-              dispatch(setSortByOrder(item.label));
-            }}
+            onClick={() => handleItemClick(item.label)}
           >
             <p>{item.label}</p>
 

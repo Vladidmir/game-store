@@ -16,7 +16,6 @@ export type TCategoryData = {
   label: CategoryEnum;
   Icon: FC<SVGProps<SVGSVGElement>>;
 };
-// краще б написав два окремих компоненти,ніж один універсальний і важко читаємий, але вже пізно відступати :D
 
 export const CategoryBurger = () => {
   const dispatch = useAppDispatch();
@@ -36,7 +35,9 @@ export const CategoryBurger = () => {
   ];
 
   const [items] = useState<TCategoryData[]>(categoryData);
-  const [selectedItem, setSelectedItem] = useState(0);
+  const [selectedItem, setSelectedItem] = useState(
+    categoryName === CategoryEnum.GAME_PRICE ? 1 : 0
+  );
   const [isVisible, setVisibility] = useState(false);
 
   const burgerRef = useRef(null);
