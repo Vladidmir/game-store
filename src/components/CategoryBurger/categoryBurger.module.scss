@@ -1,0 +1,95 @@
+.dropdown {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	height: 40px;
+	width: 212px;
+	min-width: 150px;
+	padding: 0 5px;
+	border-radius: 10px;
+	background-color: var(--gray);
+	position: relative;
+	z-index: 1000;
+
+	
+
+	&Category {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+
+	&Header {
+		padding: 10px;
+		cursor: pointer;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		color: var(--white)
+	}
+
+	&Body {
+		transition: all 0.2s;
+		width: 190px;
+		height: 66px;
+		margin-top: 7px;
+		border-radius: 10px;
+		position: absolute;
+		background: var(--gray);
+		top: -400px;
+		visibility: 0;
+		p {
+			font-weight: bold;
+		}
+	
+	}
+
+	&Open {
+		display: grid;
+		grid-template-columns: 1fr;
+		grid-template-rows: 1fr 1fr;
+		width: 212px;
+		left: 0;
+		align-items: center;
+		justify-content: center;
+		align-items: center;
+		font-size: 14px;
+		top: 40px;
+		visibility: 1;
+	}
+
+	&Item {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding-left: 13px;
+		padding-right: 4px;
+		min-width: 150px;
+		:hover {
+			cursor: pointer;
+		}
+
+
+		&SelectedText {
+			color: var(--white);
+		}
+		&Icon {
+			&Selected * {
+				opacity: 1;
+				fill: var(--white);
+				transition: all 0.3s;
+			}
+		}
+	}
+
+	&Icon {
+		font-size: 13px;
+		color: #91A5BE;
+		transform: rotate(0deg);
+
+		&Open {
+			transition: all 0.3s;
+			transform: rotate(180deg);
+		}
+	}
+}

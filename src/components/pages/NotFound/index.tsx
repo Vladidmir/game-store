@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { ReactComponent as HomePageIcon } from "../../../assets/homepage.svg";
 import s from "./notFound.module.scss";
-import { ErrorMessage } from "components/ErrorMesage";
+import { ErrorMessage } from "components/UI/ErrorMesage";
 export const NotFound = () => {
   let navigate = useNavigate();
 

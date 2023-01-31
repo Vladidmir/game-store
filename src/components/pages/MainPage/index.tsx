@@ -7,8 +7,8 @@ import {
 } from "../../index";
 import { useAppDispatch, useAppSelector } from "store";
 import { fetchGamesByName } from "store/slices/gameSlice/gameAsyncAction";
-import { ErrorMessage } from "components/ErrorMesage";
-import { NoActionGif } from "components/NoActionGif";
+import { ErrorMessage } from "components/UI/ErrorMesage";
+import { NoActionGif } from "components/UI/NoActionGif";
 import { usePagination } from "hooks/usePagination";
 
 import s from "./mainPage.module.scss";
@@ -48,7 +48,7 @@ export const MainPage = () => {
   useEffect(() => {
     //на цьому тарифі в API обмеження по 10секунд - 1 запрос.
     //якщо пригати з детальної чторінки до головної - буде помилка 429
-    dispatch(fetchGamesByName());
+    dispatch(fetchGamesByName({ categoryName, searchValue, sortByOrder }));
   }, [dispatch, searchValue, sortByOrder, categoryName]);
 
   return (

@@ -11,16 +11,14 @@ import { customDateSort, sortByPrice } from "helpers";
 
 export const fetchGamesByName = createAsyncThunk<
   IGameData[],
-  undefined,
+  GameFilterSliceState,
   {
     state: { gameReducer: IGameSlice; gameFilterReducer: GameFilterSliceState };
   }
 >(
   "@gameSlice/fetchGamesByName",
 
-  async (_, { getState }) => {
-    const { searchValue, categoryName, sortByOrder } =
-      getState().gameFilterReducer;
+  async ({ categoryName, searchValue, sortByOrder }) => {
     if (searchValue === "") return [];
 
     const { data } = await axios.get<IGameData[]>(
