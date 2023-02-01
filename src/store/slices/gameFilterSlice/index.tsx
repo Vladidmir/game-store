@@ -1,9 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import {
-  CategoryEnum,
-  OrderEnum,
-  GameFilterSliceState,
-} from "./gameFilterTypes";
+import { CategoryEnum, OrderEnum } from "types/gamesSorting.types";
+import { GameFilterSliceState } from "./gameFilterTypes";
 
 const initialState: GameFilterSliceState = {
   searchValue: "",

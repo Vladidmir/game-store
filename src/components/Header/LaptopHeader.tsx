@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
-import { Search, FavoriteButton, OrderBurger, CategoryBurger } from "../index";
+import { Search, FavoriteButton, Sorting } from "../index";
 import { ReactComponent as HomePageIcon } from "../../assets/homepage.svg";
 import steamLogo from "../../assets/steam_logo.png";
 
@@ -19,8 +19,7 @@ export const LaptopHeader: FC = () => {
       <Search />
       {location !== "/favorites" && (
         <>
-          <OrderBurger />
-          <CategoryBurger />
+          <Sorting />
         </>
       )}
 

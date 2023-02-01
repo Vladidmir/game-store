@@ -14,7 +14,7 @@ export const customDateSort = (arr: IGameData[], order: "-" | "+") => {
 };
 
 export const sortByPrice = (arr: IGameData[], order: "-" | "+") => {
-  // несправне api, я ледь не зламав башку доки розібрався з ціною яка приходить
+  // костиль для несправного API
   arr.sort((a, b) => {
     let indexA = a.price.indexOf("€");
     let indexB = b.price.indexOf("€");

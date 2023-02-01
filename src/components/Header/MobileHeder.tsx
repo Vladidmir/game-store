@@ -1,7 +1,8 @@
 import { FC } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
-import { Search, FavoriteButton, OrderBurger, CategoryBurger } from "../index";
+import { Search, FavoriteButton } from "../index";
+import { Sorting } from "components/Sorting";
 import { ReactComponent as HomePageIcon } from "../../assets/homepage.svg";
 
 import steamLogo from "../../assets/steam_logo.png";
@@ -35,8 +36,7 @@ export const MobileHeader: FC = () => {
         <Search />
         {location !== "/favorites" && (
           <div className={s.sort}>
-            <OrderBurger />
-            <CategoryBurger />
+            <Sorting />
           </div>
         )}
       </div>

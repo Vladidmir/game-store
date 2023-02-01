@@ -2,12 +2,9 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import { IGameData } from "types/game.interface";
 import axios from "lib/axios";
 import { IGameSlice } from "./gameSliceTypes";
-import {
-  CategoryEnum,
-  GameFilterSliceState,
-  OrderEnum,
-} from "../gameFilterSlice/gameFilterTypes";
+import { GameFilterSliceState } from "../gameFilterSlice/gameFilterTypes";
 import { customDateSort, sortByPrice } from "helpers";
+import { CategoryEnum, OrderEnum } from "types/gamesSorting.types";
 
 export const fetchGamesByName = createAsyncThunk<
   IGameData[],

@@ -1,34 +1,25 @@
 import { useState, FC, useRef } from "react";
-import { useAppDispatch, useAppSelector } from "store";
+import { ReactComponent as SlidersIcon } from "../../../assets/sort/sliders.svg";
 
-import { ReactComponent as SlidersIcon } from "../../assets/sort/sliders.svg";
-
-import useOnClickOutside from "../../hooks/useOnClickOutside";
-import { OrderEnum } from "store/slices/gameFilterSlice/gameFilterTypes";
-import { setSortByOrder } from "store/slices/gameFilterSlice";
+import useOnClickOutside from "../../../hooks/useOnClickOutside";
 
 import cn from "classnames";
 import s from "./orderBurger.module.scss";
-export type TOrderData = {
-  id: number;
-  label: OrderEnum;
-};
 
-export const OrderBurger: FC = () => {
-  const dispatch = useAppDispatch();
-  const { sortByOrder } = useAppSelector((state) => state.gameFilterReducer);
+import { TOrderData, OrderEnum } from "types/gamesSorting.types";
 
-  const orderData: TOrderData[] = [
-    {
-      id: 1,
-      label: OrderEnum.TO_LOWER,
-    },
-    {
-      id: 0,
-      label: OrderEnum.TO_BIGGER,
-    },
-  ];
-  const [items] = useState<TOrderData[]>(orderData);
+interface IOrderBurger {
+  orderOptions: TOrderData[];
+  currentOrder: OrderEnum;
+  onChangeSortByOrder: (selectedOrder: OrderEnum) => void;
+}
+
+export const OrderBurger: FC<IOrderBurger> = ({
+  currentOrder,
+  onChangeSortByOrder,
+  orderOptions,
+}) => {
+  const [items] = useState(orderOptions);
   const [isVisible, setVisibility] = useState(false);
   const burgerRef = useRef(null);
 
@@ -37,7 +28,7 @@ export const OrderBurger: FC = () => {
   const toggleDropdown = () => setVisibility(!isVisible);
 
   const handleItemClick = (label: OrderEnum) => {
-    dispatch(setSortByOrder(label));
+    onChangeSortByOrder(label);
     setTimeout(() => {
       toggleDropdown();
     }, 200);
@@ -59,11 +50,17 @@ export const OrderBurger: FC = () => {
             className={s.dropdownItem}
             onClick={() => handleItemClick(item.label)}
           >
-            <p>{item.label}</p>
+            <p
+              className={cn(s.dropdownItemIcon, {
+                [s.dropdownItemSelected]: item.label === currentOrder,
+              })}
+            >
+              {item.label}
+            </p>
 
             <div
               className={cn(s.dropdownItemDot, {
-                [s.dropdownItemDotSelected]: item.label === sortByOrder,
+                [s.dropdownItemDotSelected]: item.label === currentOrder,
               })}
             ></div>
           </div>
