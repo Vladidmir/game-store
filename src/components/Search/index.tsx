@@ -1,6 +1,7 @@
-import { useState, useEffect, ChangeEvent, FormEvent } from "react";
+import { useState, useEffect, ChangeEvent } from "react";
 import { useAppDispatch } from "store";
 import { ReactComponent as SearchIcon } from "../../assets/search.svg";
+import { ReactComponent as EraserIcon } from "../../assets/eraser.svg";
 import { useAppSelector } from "store";
 
 import s from "./search.module.scss";
@@ -35,8 +36,16 @@ export const Search = () => {
         value={liveValue}
         placeholder="Enter an app name..."
       />
+
       <label htmlFor="search">
-        <SearchIcon className={s.searchIcon} />
+        {searchValue ? (
+          <EraserIcon
+            onClick={() => setLiveValue("")}
+            className={s.searchIcon}
+          />
+        ) : (
+          <SearchIcon className={s.searchIcon} />
+        )}
       </label>
     </div>
   );

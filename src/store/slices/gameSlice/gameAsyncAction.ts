@@ -25,17 +25,15 @@ export const fetchGamesByName = createAsyncThunk<
     let displayData = data;
 
     if (categoryName === CategoryEnum.GAME_RELEASE) {
-      if (sortByOrder === OrderEnum.TO_BIGGER) {
-        displayData = customDateSort(data, "-");
-      } else {
-        displayData = customDateSort(data, "+");
-      }
+      displayData = customDateSort(
+        data,
+        sortByOrder === OrderEnum.TO_BIGGER ? "-" : "+"
+      );
     } else if (categoryName === CategoryEnum.GAME_PRICE) {
-      if (sortByOrder === OrderEnum.TO_BIGGER) {
-        displayData = sortByPrice(data, "-");
-      } else {
-        displayData = sortByPrice(data, "+");
-      }
+      displayData = sortByPrice(
+        data,
+        sortByOrder === OrderEnum.TO_BIGGER ? "-" : "+"
+      );
     }
     return displayData;
   }

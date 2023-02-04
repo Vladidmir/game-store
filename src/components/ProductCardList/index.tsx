@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { useAppSelector } from "store";
-import { ProductCard, ProductCardLoader } from "../index";
+import { ProductCard } from "../index";
 import { IGameData } from "types/game.interface";
 import { ErrorMessage } from "components/UI/ErrorMesage";
 import s from "./productCardList.module.scss";

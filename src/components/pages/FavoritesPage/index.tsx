@@ -1,22 +1,26 @@
-import s from "./favoritesPage.module.scss";
-import { Pagination, ProductCardList, Header } from "../../index";
-import { ErrorMessage } from "../../index";
-
-import { usePagination } from "hooks/usePagination";
+import { useMemo } from "react";
 import { useAppSelector } from "store";
-import { useEffect } from "react";
+
+import { Pagination, ProductCardList, Header, ErrorMessage } from "../../index";
+
+import s from "./favoritesPage.module.scss";
+
 import { IGameData } from "types/game.interface";
+import { usePagination } from "hooks/usePagination";
 
 export const FavoritesPage = () => {
-  const { favorites } = useAppSelector((state) => state.gameFavoritesReduser);
-  const { searchValue } = useAppSelector((state) => state.gameFilterReducer);
+  const favorites = useAppSelector(
+    (state) => state.gameFavoritesReduser.favorites
+  );
+  const searchValue = useAppSelector(
+    (state) => state.gameFilterReducer.searchValue
+  );
 
-  const { currentItems, setCurrentItems, handlePageClick, pageCount } =
-    usePagination({
-      data: favorites,
-    });
+  const { currentItems, handlePageClick, pageCount } = usePagination({
+    data: favorites,
+  });
 
-  useEffect(() => {
+  const currentItemsMemo = useMemo(() => {
     const localFilterFavorotsByTitle = (data: IGameData[]) => {
       return data.filter((obj) => {
         if (obj.title.toLowerCase().includes(searchValue.toLowerCase())) {
@@ -25,11 +29,10 @@ export const FavoritesPage = () => {
         return false;
       });
     };
-    setCurrentItems((cuurentItems) => localFilterFavorotsByTitle(cuurentItems));
-    if (!searchValue.length) {
-      setCurrentItems(favorites);
-    }
-  }, [favorites, searchValue, setCurrentItems]);
+    return searchValue.length
+      ? localFilterFavorotsByTitle(currentItems)
+      : currentItems;
+  }, [currentItems, searchValue]);
 
   return (
     <>
@@ -39,7 +42,7 @@ export const FavoritesPage = () => {
           <div className={s.scroll}>
             <div className={s.mainPage}>
               <div className={s.scroll}>
-                <ProductCardList data={currentItems} />
+                <ProductCardList data={currentItemsMemo} />
               </div>
               <Pagination
                 pageCount={pageCount}

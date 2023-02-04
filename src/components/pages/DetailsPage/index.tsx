@@ -3,47 +3,39 @@ import { useParams, useNavigate } from "react-router";
 import { IGameDataDetails } from "types/game.interface";
 import { ProductCardLoader, ErrorMessage } from "components/index";
 import { DetailCard } from "./DetailCard";
-
 import axios from "lib/axios";
-
 import s from "./detailsPage.module.scss";
-
-//не хотів для локального функціоналу робити окремий слайс
 
 export const DetailsPage: FC = () => {
   const { cardId } = useParams();
   const [selectedCard, setSelectedCard] = useState<IGameDataDetails>();
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(false);
-
+  const [loadingError, setLoadingError] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
     const getSelectedCard = async () => {
-      setIsLoading(true);
-      await axios
-        .get<IGameDataDetails>(`appDetail/${cardId}`)
-        .then((gameInfo) => {
-          setSelectedCard(gameInfo.data);
-          setError(false);
-        })
-        .catch(() => {
-          setError(true);
-          navigate(-1);
-        });
-      setIsLoading(false);
+      try {
+        const gameInfo = await axios.get<IGameDataDetails>(
+          `appDetail/${cardId}`
+        );
+        setSelectedCard(gameInfo.data);
+        setLoadingError(false);
+      } catch {
+        setLoadingError(true);
+        navigate(-1);
+      }
     };
 
     getSelectedCard();
-  }, [cardId]);
+  }, [cardId, navigate]);
 
-  if (error) {
+  if (loadingError) {
     return <ErrorMessage textError="Failed to load game" />;
   }
 
   return (
     <div className={s.detailPage}>
-      {isLoading === false && selectedCard ? (
+      {selectedCard ? (
         <DetailCard key={cardId} {...selectedCard} />
       ) : (
         <ProductCardLoader />
