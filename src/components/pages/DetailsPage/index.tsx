@@ -8,6 +8,7 @@ import s from "./detailsPage.module.scss";
 
 export const DetailsPage: FC = () => {
   const { cardId } = useParams();
+
   const [selectedCard, setSelectedCard] = useState<IGameDataDetails>();
   const [loadingError, setLoadingError] = useState(false);
   const navigate = useNavigate();

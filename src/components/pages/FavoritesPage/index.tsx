@@ -1,10 +1,9 @@
-import { useMemo } from "react";
-import { useAppSelector } from "store";
+import { useMemo, useEffect } from "react";
+import { useAppSelector, useAppDispatch } from "store";
 
 import { Pagination, ProductCardList, Header, ErrorMessage } from "../../index";
 
 import s from "./favoritesPage.module.scss";
-
 import { IGameData } from "types/game.interface";
 import { usePagination } from "hooks/usePagination";
 

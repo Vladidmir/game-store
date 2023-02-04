@@ -1,14 +1,14 @@
 import { useState, useEffect, ChangeEvent } from "react";
-import { useAppDispatch } from "store";
+import { useLocation } from "react-router";
+import { useAppDispatch, useAppSelector } from "store";
+
 import { ReactComponent as SearchIcon } from "../../assets/search.svg";
 import { ReactComponent as EraserIcon } from "../../assets/eraser.svg";
-import { useAppSelector } from "store";
 
 import s from "./search.module.scss";
 
 import useDebounce from "hooks/useDebounce";
 import { setSearchValue } from "store/slices/gameFilterSlice";
-import { useLocation } from "react-router";
 
 export const Search = () => {
   const { searchValue } = useAppSelector((state) => state.gameFilterReducer);
@@ -22,6 +22,12 @@ export const Search = () => {
     e.preventDefault();
     setLiveValue(e.target.value);
   };
+
+  useEffect(() => {
+    if (isFavorites) {
+      setLiveValue("");
+    }
+  }, []);
 
   useEffect(() => {
     dispatch(setSearchValue(liveValue));
